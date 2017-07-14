@@ -1,1 +1,1 @@
-# vendingmachine
+# Java basic test programs
