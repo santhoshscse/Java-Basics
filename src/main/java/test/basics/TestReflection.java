@@ -1,4 +1,4 @@
-package test.java.basics;
+package test.basics;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
