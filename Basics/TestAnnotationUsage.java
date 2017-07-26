@@ -1,4 +1,3 @@
-package test.basics;
 
 import java.lang.annotation.Annotation;
 

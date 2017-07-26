@@ -1,4 +1,3 @@
-package test.basics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,9 +60,9 @@ public class TestGeneric {
 		for (A l : listOflist) {
 			l.print();
 			System.out.println(l.a);
-//			if (l instanceof A) {
-//				System.out.println(((A) l).a);
-//			}
+			// if (l instanceof A) {
+			// System.out.println(((A) l).a);
+			// }
 			// if (l instanceof B) {
 			// System.out.println(((B) l).a);
 			// }

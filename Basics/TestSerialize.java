@@ -1,4 +1,3 @@
-package test.basics;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,7 +12,7 @@ public class TestSerialize implements Serializable {
 	private transient static String company = "ksl";
 	private Address address = new Address();
 
-	 class Address implements Serializable {
+	class Address implements Serializable {
 		private transient String city = "bangalore";
 		private static final String country = "india";
 
@@ -57,8 +56,7 @@ public class TestSerialize implements Serializable {
 
 		TestSerialize tt = (TestSerialize) ois.readObject();
 		System.out.println(tt);
-		
-		
+
 		TestSerialize ttt = new TestSerialize();
 		System.out.println(ttt);
 	}

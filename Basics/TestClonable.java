@@ -1,4 +1,3 @@
-package test.basics;
 
 import java.io.IOException;
 
@@ -39,7 +38,7 @@ public class TestClonable implements Cloneable {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	public static void main(String[] args) throws IOException, ClassNotFoundException, CloneNotSupportedException {
 
 		TestClonable t = new TestClonable();
@@ -48,7 +47,7 @@ public class TestClonable implements Cloneable {
 		System.out.println(t.address.hashCode());
 		TestClonable tt = (TestClonable) t.clone();
 		System.out.println(tt);
-		t.address.city="chennai";
+		t.address.city = "chennai";
 		System.out.println(tt);
 		System.out.println(tt.hashCode());
 		System.out.println(tt.address.hashCode());
