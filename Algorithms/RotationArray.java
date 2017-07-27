@@ -15,7 +15,7 @@ public class RotationArray {
 		int[] res;
 
 		int _a_size = 0;
-		_a_size = Integer.parseInt(in.nextLine().trim());
+		_a_size = in.nextInt();
 		int[] _a = new int[_a_size];
 		int _a_item;
 		for (int _a_i = 0; _a_i < _a_size; _a_i++) {
@@ -35,11 +35,11 @@ public class RotationArray {
 		res = getMaxElementIndices(_a, _rotate);
 		for (int res_i = 0; res_i < res.length; res_i++) {
 			System.out.println(res[res_i]);
-			 bw.write(String.valueOf(res[res_i]));
-			 bw.newLine();
+			bw.write(String.valueOf(res[res_i]));
+			bw.newLine();
 		}
 
-		 bw.close();
+		bw.close();
 	}
 
 	private static int[] getMaxElementIndices(int[] _a, int[] _rotate) {
