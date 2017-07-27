@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -8,8 +10,8 @@ import java.util.Scanner;
 public class RotationArray {
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
-		// final String fileName = System.getenv("OUTPUT_PATH");
-		// BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+		final String fileName = System.getenv("OUTPUT_PATH");
+		BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
 		int[] res;
 
 		int _a_size = 0;
@@ -33,11 +35,11 @@ public class RotationArray {
 		res = getMaxElementIndices(_a, _rotate);
 		for (int res_i = 0; res_i < res.length; res_i++) {
 			System.out.println(res[res_i]);
-			// bw.write(String.valueOf(res[res_i]));
-			// bw.newLine();
+			 bw.write(String.valueOf(res[res_i]));
+			 bw.newLine();
 		}
 
-		// bw.close();
+		 bw.close();
 	}
 
 	private static int[] getMaxElementIndices(int[] _a, int[] _rotate) {
