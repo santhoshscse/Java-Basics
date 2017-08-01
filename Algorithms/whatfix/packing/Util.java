@@ -3,14 +3,13 @@ package whatfix.packing;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * This class helps 
- * 1. to convert from file lines to items object
- * 2. to calculate total
- * 3. to convert items to desired output 
- * */
+/**
+ * @author santhoshsrinivasan
+ *
+ *         This class helps 1. to convert from file lines to items object 2. to
+ *         convert items to desired output
+ */
 public class Util {
-	
 
 	public static Object[] getAsInput(String str) {
 		String[] tmp1 = str.split(":");

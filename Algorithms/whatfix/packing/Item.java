@@ -1,5 +1,9 @@
 package whatfix.packing;
 
+/**
+ * @author santhoshsrinivasan
+ *
+ */
 public class Item {
 
 	private int index;
