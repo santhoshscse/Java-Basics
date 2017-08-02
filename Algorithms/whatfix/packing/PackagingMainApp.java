@@ -13,7 +13,12 @@ public class PackagingMainApp {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		Scanner sc = new Scanner(new File(args[0]));
+		if (args.length == 0) {
+			System.out.println("Please specify input filepath as commandline argument");
+			return;
+		}
+		String filePath = args[0];
+		Scanner sc = new Scanner(new File(filePath));
 		while (sc.hasNextLine()) {
 			String str = sc.nextLine();
 			Object[] in = Util.getAsInput(str);

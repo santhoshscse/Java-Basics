@@ -14,7 +14,7 @@ public class Robot {
 		 * 2. Bottom right corner is considered as (m-1, n-1)
 		 */
 		int m = 4;
-		int n = 3;
+		int n = 4;
 
 		int[][] visited = new int[m][n];
 		Stack<String> stack = new Stack<String>();
