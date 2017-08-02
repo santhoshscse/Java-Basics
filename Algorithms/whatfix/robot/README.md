@@ -2,5 +2,5 @@ Main class is Robot which helps to find out no. of ways to reach bottom right co
 
 Build steps:
 
-1. javac -d . Robot.java
+1. javac -d . whatfix/robot/Robot.java
 2. java -cp . whatfix.robot.Robot
