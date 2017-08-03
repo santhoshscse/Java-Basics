@@ -1,3 +1,5 @@
+package common;
+
 public class RobotPML {
 	public static void main(String args[]) throws Exception {
 		System.out.println(compute("PMMMMMMMMMMMMMMMMMMMLPLPLPLPLPLPLPLPLPLPL"));
