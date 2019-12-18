@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -23,24 +25,104 @@ import java.util.HashMap;
  * s varun laksman
  * s varun akhilan
  * s varun udhaya
-
-
- * */
+ * <p>
+ * <p>
+ * <p>
+ * 1 = A, I, J, Q, Y
+ * <p>
+ * 2 = B, K, R
+ * <p>
+ * 3 = C, G, L, S
+ * <p>
+ * 4 = D, M, T
+ * <p>
+ * 5 = E, H, N, X
+ * <p>
+ * 6 = U, V, W
+ * <p>
+ * 7 = O, Z
+ * <p>
+ * 8 = F, P
+ * <p>
+ * 5 6
+ * <p>
+ * TN 20 CY 0864
+ * <p>
+ * 1 = A, I, J, Q, Y
+ * <p>
+ * 2 = B, K, R
+ * <p>
+ * 3 = C, G, L, S
+ * <p>
+ * 4 = D, M, T
+ * <p>
+ * 5 = E, H, N, X
+ * <p>
+ * 6 = U, V, W
+ * <p>
+ * 7 = O, Z
+ * <p>
+ * 8 = F, P
+ * <p>
+ * 5 6
+ * <p>
+ * TN 20 CY 0864
+ * <p>
+ * 1 = A, I, J, Q, Y
+ * <p>
+ * 2 = B, K, R
+ * <p>
+ * 3 = C, G, L, S
+ * <p>
+ * 4 = D, M, T
+ * <p>
+ * 5 = E, H, N, X
+ * <p>
+ * 6 = U, V, W
+ * <p>
+ * 7 = O, Z
+ * <p>
+ * 8 = F, P
+ * <p>
+ * 5 6
+ * <p>
+ * TN 20 CY 0864
+ * <p>
+ * 1 = A, I, J, Q, Y
+ * <p>
+ * 2 = B, K, R
+ * <p>
+ * 3 = C, G, L, S
+ * <p>
+ * 4 = D, M, T
+ * <p>
+ * 5 = E, H, N, X
+ * <p>
+ * 6 = U, V, W
+ * <p>
+ * 7 = O, Z
+ * <p>
+ * 8 = F, P
+ * <p>
+ * 5 6
+ * <p>
+ * TN 20 CY 0864
+ */
 /**
  * 1 = A, I, J, Q, Y
- * 
+ *
  * 2 = B, K, R
- * 
+ *
  * 3 = C, G, L, S
- * 
+ *
  * 4 = D, M, T
- * 
+ *
  * 5 = E, H, N, X
- * 
+ *
  * 6 = U, V, W
- * 
+ *
  * 7 = O, Z
- * 
+ *
  * 8 = F, P
  */
 
@@ -54,212 +136,210 @@ import java.util.HashMap;
 
 /**
  * Athirstam = 1 3 6 9 10 14 15 16 18 21 24 27 32 33 36 42 46 50 51
- * 
+ *
  * Miga miga Athirstam = 19 23 37 41 45
- * 
+ *
  * Sumar = 2 12 30 38 39 48 54 57
- * 
+ *
  * Ethiriya alipathu = 20 52 55
- * 
+ *
  * Abathu = 26 29 35 4 53
- * 
+ *
  * Very bad = 11 13 17 22 28 31 40 49 58
- * 
+ *
  * Very very bad = 56
- * 
+ *
  * Sothanai = 25 43 47 34
- * 
+ *
  */
 
 public class Numerology {
-	enum Cat {
-		Athirstam, MigaMigaAthirstam, Sumar, EthiriyaiAzhipathu, Abathu, VeryVeryBad, VeryBad;
-	}
+    enum Cat {
+        Athirstam, MigaMigaAthirstam, Sumar, EthiriyaiAzhipathu, Abathu, VeryVeryBad, VeryBad;
+    }
 
-	public static void main(String[] args) throws IOException {
-		HashMap<String, Integer> alphaNumeric = getAlphaVsNumeric();
-		HashMap<Integer, Cat> numberCategory = getNumberVsCategory();
+    public static void main(String[] args) throws IOException {
+        HashMap<String, Integer> alphaNumeric = getAlphaVsNumeric();
+        HashMap<Integer, Cat> numberCategory = getNumberVsCategory();
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<String> recommended = new ArrayList<>();
+        ArrayList<String> notRecommended = new ArrayList<>();
 
-		String line = null;
-		while (!(line = br.readLine()).isEmpty()) {
+        String line = null;
+        while (!(line = br.readLine()).isEmpty()) {
+            String[] datas = line.split("\\ ");
+            printCombinations(alphaNumeric, numberCategory, datas, recommended, notRecommended);
+        }
 
-			String[] datas = line.split("\\ ");
+        recommended.forEach(System.out::println);
+        notRecommended.forEach(System.out::println);
 
-			printCombinations(alphaNumeric, numberCategory, datas);
-		}
+    }
 
-	}
+    private static void printCombinations(HashMap<String, Integer> alphaNumeric, HashMap<Integer, Cat> numberCategory,
+                                          String[] datas, List<String> recommended, List<String> notRecommended) {
 
-	private static void printCombinations(HashMap<String, Integer> alphaNumeric, HashMap<Integer, Cat> numberCategory,
-			String[] datas) {
-		int total = 0;
-		if (datas.length > 2) {
-			System.out.print(datas[0] + " " + datas[1] + " " + datas[2] + " :: ");
-			total = getTotal(alphaNumeric, datas[0] + datas[1] + datas[2]);
-			System.out.print(total + " :: ");
-			System.out.println(numberCategory.get(total));
-		}
+        for (int i = 0; i < datas.length; i++) {
+            String input = "";
+            for (int j = i; j < datas.length; j++) {
+                input += datas[j];
+                if (input.length() == 1) {
+                    continue;
+                }
 
-		System.out.print(datas[0] + " " + datas[1] + " :: ");
-		total = getTotal(alphaNumeric, datas[0] + datas[1]);
-		System.out.print(total + " :: ");
-		System.out.println(numberCategory.get(total));
+                int total = getTotal(alphaNumeric, input);
+                Cat outputCat = numberCategory.get(total);
+                if (outputCat == Cat.Athirstam || outputCat == Cat.MigaMigaAthirstam
+                    || outputCat == Cat.EthiriyaiAzhipathu || outputCat == Cat.Sumar) {
 
-		if (datas.length > 2) {
-			System.out.print(datas[1] + " " + datas[2] + " :: ");
-			total = getTotal(alphaNumeric, datas[1] + datas[2]);
-			System.out.print(total + " :: ");
-			System.out.println(numberCategory.get(total));
-		}
+                    String good = "[Recommended] " + input + " :: " + total + " :: " + outputCat;
+                    recommended.add(good);
+                    System.out.println(good);
 
-		System.out.print(datas[1] + " :: ");
-		total = getTotal(alphaNumeric, datas[1]);
-		System.out.print(total + " :: ");
-		System.out.println(numberCategory.get(total));
+                } else {
+                    String notGood = "[Not Recommended] " + input + " :: " + total + " :: " + outputCat;
+                    notRecommended.add(notGood);
+                    System.err.println(notGood);
+                }
+            }
+        }
 
-		if (datas.length > 2) {
-			System.out.print(datas[2] + " :: ");
-			total = getTotal(alphaNumeric, datas[2]);
-			System.out.print(total + " :: ");
-			System.out.println(numberCategory.get(total));
-		}
-	}
 
-	private static int getTotal(HashMap<String, Integer> alphaNumeric, String input) {
+    }
 
-		int total = 0;
-		for (int i = 0; i < input.length(); i++) {
-			total += alphaNumeric.get((input.charAt(i) + "").toUpperCase());
-		}
+    private static int getTotal(HashMap<String, Integer> alphaNumeric, String input) {
 
-		if (total > 58) {
-			int value = total;
-			total = 0;
-			while (value > 0) {
-				total += value % 10;
-				value = value / 10;
-			}
-		}
+        int total = 0;
+        for (int i = 0; i < input.length(); i++) {
+            total += alphaNumeric.get((input.charAt(i) + "").toUpperCase());
+        }
 
-		return total;
-	}
+        if (total > 58) {
+            int value = total;
+            total = 0;
+            while (value > 0) {
+                total += value % 10;
+                value = value / 10;
+            }
+        }
 
-	
+        return total;
+    }
 
-	private static HashMap<Integer, Cat> getNumberVsCategory() {
 
-		HashMap<Integer, Cat> numberCategory = new HashMap<>();
+    private static HashMap<Integer, Cat> getNumberVsCategory() {
 
-		// Athirstam = 1 3 6 9 10 14 15 16 18 21 24 27 32 33 36 42 46 50 51
-		numberCategory.put(1, Cat.Athirstam);
-		numberCategory.put(3, Cat.Athirstam);
-		numberCategory.put(6, Cat.Athirstam);
-		numberCategory.put(9, Cat.Athirstam);
-		numberCategory.put(10, Cat.Athirstam);
-		numberCategory.put(14, Cat.Athirstam);
-		numberCategory.put(15, Cat.Athirstam);
-		numberCategory.put(16, Cat.Athirstam);
-		numberCategory.put(18, Cat.Athirstam);
-		numberCategory.put(21, Cat.Athirstam);
-		numberCategory.put(24, Cat.Athirstam);
-		numberCategory.put(27, Cat.Athirstam);
-		numberCategory.put(32, Cat.Athirstam);
-		numberCategory.put(33, Cat.Athirstam);
-		numberCategory.put(36, Cat.Athirstam);
-		numberCategory.put(42, Cat.Athirstam);
-		numberCategory.put(46, Cat.Athirstam);
-		numberCategory.put(50, Cat.Athirstam);
-		numberCategory.put(51, Cat.Athirstam);
+        HashMap<Integer, Cat> numberCategory = new HashMap<>();
 
-		// Miga miga Athirstam = 19 23 37 41 45
-		numberCategory.put(19, Cat.MigaMigaAthirstam);
-		numberCategory.put(23, Cat.MigaMigaAthirstam);
-		numberCategory.put(37, Cat.MigaMigaAthirstam);
-		numberCategory.put(41, Cat.MigaMigaAthirstam);
-		numberCategory.put(45, Cat.MigaMigaAthirstam);
+        // Athirstam = 1 3 6 9 10 14 15 16 18 21 24 27 32 33 36 42 46 50 51
+        numberCategory.put(1, Cat.Athirstam);
+        numberCategory.put(3, Cat.Athirstam);
+        numberCategory.put(6, Cat.Athirstam);
+        numberCategory.put(9, Cat.Athirstam);
+        numberCategory.put(10, Cat.Athirstam);
+        numberCategory.put(14, Cat.Athirstam);
+        numberCategory.put(15, Cat.Athirstam);
+        numberCategory.put(16, Cat.Athirstam);
+        numberCategory.put(18, Cat.Athirstam);
+        numberCategory.put(21, Cat.Athirstam);
+        numberCategory.put(24, Cat.Athirstam);
+        numberCategory.put(27, Cat.Athirstam);
+        numberCategory.put(32, Cat.Athirstam);
+        numberCategory.put(33, Cat.Athirstam);
+        numberCategory.put(36, Cat.Athirstam);
+        numberCategory.put(42, Cat.Athirstam);
+        numberCategory.put(46, Cat.Athirstam);
+        numberCategory.put(50, Cat.Athirstam);
+        numberCategory.put(51, Cat.Athirstam);
 
-		// Sumar = 2 12 30 38 39 48 54 57
-		numberCategory.put(2, Cat.Sumar);
-		numberCategory.put(12, Cat.Sumar);
-		numberCategory.put(30, Cat.Sumar);
-		numberCategory.put(38, Cat.Sumar);
-		numberCategory.put(39, Cat.Sumar);
-		numberCategory.put(48, Cat.Sumar);
-		numberCategory.put(54, Cat.Sumar);
-		numberCategory.put(57, Cat.Sumar);
+        // Miga miga Athirstam = 19 23 37 41 45
+        numberCategory.put(19, Cat.MigaMigaAthirstam);
+        numberCategory.put(23, Cat.MigaMigaAthirstam);
+        numberCategory.put(37, Cat.MigaMigaAthirstam);
+        numberCategory.put(41, Cat.MigaMigaAthirstam);
+        numberCategory.put(45, Cat.MigaMigaAthirstam);
 
-		// Ethiriya alipathu = 20 52 55
-		numberCategory.put(20, Cat.EthiriyaiAzhipathu);
-		numberCategory.put(52, Cat.EthiriyaiAzhipathu);
-		numberCategory.put(55, Cat.EthiriyaiAzhipathu);
+        // Sumar = 2 12 30 38 39 48 54 57
+        numberCategory.put(2, Cat.Sumar);
+        numberCategory.put(12, Cat.Sumar);
+        numberCategory.put(30, Cat.Sumar);
+        numberCategory.put(38, Cat.Sumar);
+        numberCategory.put(39, Cat.Sumar);
+        numberCategory.put(48, Cat.Sumar);
+        numberCategory.put(54, Cat.Sumar);
+        numberCategory.put(57, Cat.Sumar);
 
-		// Abathu = 26 29 35 4 53
-		numberCategory.put(26, Cat.Abathu);
-		numberCategory.put(29, Cat.Abathu);
-		numberCategory.put(35, Cat.Abathu);
-		numberCategory.put(4, Cat.Abathu);
-		numberCategory.put(53, Cat.Abathu);
+        // Ethiriya alipathu = 20 52 55
+        numberCategory.put(20, Cat.EthiriyaiAzhipathu);
+        numberCategory.put(52, Cat.EthiriyaiAzhipathu);
+        numberCategory.put(55, Cat.EthiriyaiAzhipathu);
 
-		// Very bad = 11 13 17 22 28 31 40 49 58
-		numberCategory.put(11, Cat.VeryBad);
-		numberCategory.put(13, Cat.VeryBad);
-		numberCategory.put(17, Cat.VeryBad);
-		numberCategory.put(22, Cat.VeryBad);
-		numberCategory.put(28, Cat.VeryBad);
-		numberCategory.put(31, Cat.VeryBad);
-		numberCategory.put(40, Cat.VeryBad);
-		numberCategory.put(49, Cat.VeryBad);
-		numberCategory.put(58, Cat.VeryBad);
+        // Abathu = 26 29 35 4 53
+        numberCategory.put(26, Cat.Abathu);
+        numberCategory.put(29, Cat.Abathu);
+        numberCategory.put(35, Cat.Abathu);
+        numberCategory.put(4, Cat.Abathu);
+        numberCategory.put(53, Cat.Abathu);
 
-		// Very very bad = 56
-		// Sothanai = 25 43 47 34
+        // Very bad = 11 13 17 22 28 31 40 49 58
+        numberCategory.put(11, Cat.VeryBad);
+        numberCategory.put(13, Cat.VeryBad);
+        numberCategory.put(17, Cat.VeryBad);
+        numberCategory.put(22, Cat.VeryBad);
+        numberCategory.put(28, Cat.VeryBad);
+        numberCategory.put(31, Cat.VeryBad);
+        numberCategory.put(40, Cat.VeryBad);
+        numberCategory.put(49, Cat.VeryBad);
+        numberCategory.put(58, Cat.VeryBad);
 
-		numberCategory.put(56, Cat.VeryVeryBad);
-		numberCategory.put(25, Cat.VeryVeryBad);
-		numberCategory.put(43, Cat.VeryVeryBad);
-		numberCategory.put(47, Cat.VeryVeryBad);
-		numberCategory.put(34, Cat.VeryVeryBad);
+        // Very very bad = 56
+        // Sothanai = 25 43 47 34
 
-		return numberCategory;
-	}
+        numberCategory.put(56, Cat.VeryVeryBad);
+        numberCategory.put(25, Cat.VeryVeryBad);
+        numberCategory.put(43, Cat.VeryVeryBad);
+        numberCategory.put(47, Cat.VeryVeryBad);
+        numberCategory.put(34, Cat.VeryVeryBad);
 
-	private static HashMap<String, Integer> getAlphaVsNumeric() {
-		HashMap<String, Integer> alphaNumeric = new HashMap<>();
-		alphaNumeric.put("A", 1);
-		alphaNumeric.put("I", 1);
-		alphaNumeric.put("J", 1);
-		alphaNumeric.put("Q", 1);
-		alphaNumeric.put("Y", 1);
+        return numberCategory;
+    }
 
-		alphaNumeric.put("B", 2);
-		alphaNumeric.put("K", 2);
-		alphaNumeric.put("R", 2);
+    private static HashMap<String, Integer> getAlphaVsNumeric() {
+        HashMap<String, Integer> alphaNumeric = new HashMap<>();
+        alphaNumeric.put("A", 1);
+        alphaNumeric.put("I", 1);
+        alphaNumeric.put("J", 1);
+        alphaNumeric.put("Q", 1);
+        alphaNumeric.put("Y", 1);
 
-		alphaNumeric.put("C", 3);
-		alphaNumeric.put("G", 3);
-		alphaNumeric.put("L", 3);
-		alphaNumeric.put("S", 3);
+        alphaNumeric.put("B", 2);
+        alphaNumeric.put("K", 2);
+        alphaNumeric.put("R", 2);
 
-		alphaNumeric.put("D", 4);
-		alphaNumeric.put("M", 4);
-		alphaNumeric.put("T", 4);
+        alphaNumeric.put("C", 3);
+        alphaNumeric.put("G", 3);
+        alphaNumeric.put("L", 3);
+        alphaNumeric.put("S", 3);
 
-		alphaNumeric.put("H", 5);
-		alphaNumeric.put("E", 5);
-		alphaNumeric.put("N", 5);
-		alphaNumeric.put("X", 5);
+        alphaNumeric.put("D", 4);
+        alphaNumeric.put("M", 4);
+        alphaNumeric.put("T", 4);
 
-		alphaNumeric.put("U", 6);
-		alphaNumeric.put("V", 6);
-		alphaNumeric.put("W", 6);
+        alphaNumeric.put("H", 5);
+        alphaNumeric.put("E", 5);
+        alphaNumeric.put("N", 5);
+        alphaNumeric.put("X", 5);
 
-		alphaNumeric.put("O", 7);
-		alphaNumeric.put("Z", 7);
+        alphaNumeric.put("U", 6);
+        alphaNumeric.put("V", 6);
+        alphaNumeric.put("W", 6);
 
-		alphaNumeric.put("P", 8);
-		alphaNumeric.put("F", 8);
-		return alphaNumeric;
-	}
+        alphaNumeric.put("O", 7);
+        alphaNumeric.put("Z", 7);
+
+        alphaNumeric.put("P", 8);
+        alphaNumeric.put("F", 8);
+        return alphaNumeric;
+    }
 }
